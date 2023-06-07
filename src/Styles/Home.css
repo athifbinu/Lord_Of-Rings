@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.search-box{
+    display: flex;
+    align-items: center;
+    
+}
+.search-box input{
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    width: 15rem;
+
+
+}
