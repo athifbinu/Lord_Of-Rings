@@ -1,20 +1,40 @@
+/* 
 .container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
 
 
-.search-box{
+} */
+
+.search-form{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    
 }
-.search-box input{
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-right: 0.5rem;
-    width: 15rem;
 
+.input-line {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
 
+  
+
+  
+.table{
+  width: 60%;
+  text-align: center;
+  margin-left: 250px;
+  margin-top: 43px;
+}
+.table thead{
+  margin-bottom: 1px solid black;
+
+}
+.table td{
+  text-align: center;
+  padding-top: 14px;
+  padding-bottom: 25px;
+}
+
+.footer-content{
+  display: flex;
 }
