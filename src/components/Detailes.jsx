@@ -3,7 +3,7 @@ import "../Styles/Detailes.css"
 
 const Detailes = () => {
   return (
-      <div className='container'>
+      <div className='main-nav'>
            <div className='left-section'>
                  <p>Name</p>
            </div>
