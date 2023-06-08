@@ -1,7 +1,24 @@
-.main-nav{
-    margin: 25px;
+
+.hero-section{
+     margin: 25px;
+}
+
+.main-section{
+ 
     display: flex;
     gap: 30px;
     font-family: sans-serif;
     font-weight: bold;
+    line-height: 28px;
+}
+.close-btn button{
+    width: 157px;
+    height: 29px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.close-btn{
+    text-align: center;
+    margin: 11px;
+    margin-left: 250px;
 }
