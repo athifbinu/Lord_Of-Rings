@@ -1,4 +1,7 @@
-.form-container{
-    margin: 10px
-    
+.container{
+    margin: 25px;
+    display: flex;
+    gap: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
 }
