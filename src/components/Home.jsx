@@ -15,16 +15,48 @@ const Home = () => {
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [name, setName] = useState('');
-  const [race, setRace] = useState([]);
-  const [gender, setGender] = useState('any');
-  const [sort, setSort] = useState('name');
+  const [search, setSeachName] = useState('');
+  const [filterarray, setFilterArray] = useState([]);
+  const [gender, setGender] = useState(null);
+  const [sort, setSort] = useState('asc');
+
+
+  const [selectedRaces, setSelectedRaces] = useState([])
+
+
+
+
+  
 
 
   useEffect(() => {
-    fetchCharecters();
-  },[limit]);
 
+    fetchCharecters();
+  },[limit,page]);
+
+
+   useEffect(()=>{
+      let sortedcharecteres=characters.sort((a, b) => {
+        if(sort === "asc"){
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        }else if(sort === 'dsc'){
+        if(a.name > b.name) {
+            return -1;
+          }
+          if (a.name < b.name) {
+            return 1;
+          }
+          return 0;
+        }
+        });
+        setCharacters(sortedcharecteres)
+   },[sort])
   const fetchCharecters = async () => {
 
     axios
@@ -36,7 +68,9 @@ const Home = () => {
         },
         params:{
           limit:limit,
-          page:page
+          page:page,
+          gender:gender!=='any'?gender:null,
+
         }
         
       })
@@ -46,6 +80,7 @@ const Home = () => {
         console.log("res", data);
 
         setCharacters(data);
+        setFilterArray(data)
       
       })
       .catch((err) => {
@@ -58,13 +93,26 @@ const Home = () => {
 
   const handleSearch=e=>{
     const SerachTerm=e.target.value;
+       setSeachName(SerachTerm)
+    const filtered=characters.filter(item =>
+      item.name.toLowerCase().includes(SerachTerm.toLowerCase()))
+         console.log("filteted",filtered)
+       setFilterArray(filtered)
+      
+  }
 
-    const SerachName=setCharacters.filter(item =>item.name
-      .toLocaleLowerCase().includes(SerachTerm.toLocaleLowerCase()))
-
-      console.log(SerachName)
+  const onpressSubmitbtn=()=>{
+       
+    fetchCharecters()
   }
   
+
+  const handleRaceSelect = (value) => {
+    setSelectedRaces(value.map(option => option.title));
+    setFilterArray(characters.filter(character => value.map(option => option.title)
+    .includes(character.race)).length!==0?characters.filter(character => value.map(option => option.title).includes(character.race)):characters);
+    console.log("handlesel",value)
+  }
 
 
 
@@ -88,6 +136,8 @@ const Home = () => {
 
 
 
+
+
   
 
 
@@ -101,15 +151,16 @@ const Home = () => {
       <div className="search-form">
         <div className="input-line">
           <label>Search</label>
-          <input type="text" className="input-box" placeholder="by name" onChange={handleSearch} />
+          <input value={search} onChange={(e)=>handleSearch(e)} type="text" className="input-box" placeholder="by name"  />
 
 
            <div className="dropdown-container">
            <label>Sort By</label>
-              <select >
-                <option value="disabled">asc order</option>
-                <option value="disabled">asc order</option>
-              </select>
+           <select value={sort} onChange={(event)=>setSort(event.target.value)} >
+                 
+                 <option value="asc">asc</option>
+                 <option value="dsc">dsc</option>
+           </select>
 
            </div>
 
@@ -117,20 +168,21 @@ const Home = () => {
         
         <div className="input-line">
 
-          <LimitTags/>
+          <LimitTags handle={(v)=>handleRaceSelect(v)}/>
 
        
            <div className="dropdown-container">
            <label>Gender</label>
-              <select >
-                 
-                <option value="Gender">Male</option>
-                <option value="Gender">Female</option>
-              </select>
+           <select value={gender} onChange={(event)=>setGender(event.target.value)} >
+                 <option value="any">any</option>
+                 <option value="Male">male</option>
+                 <option value="Female">female</option>
+             
+           </select>
 
            </div>
       
-          <button className="search-btn">Submit</button>
+          <button onClick={onpressSubmitbtn} className="search-btn">Submit</button>
         </div>
       </div>
 
@@ -147,9 +199,20 @@ const Home = () => {
           </tr>
         </thead>
         
-         {characters.map((item,index)=>{
+         {/* {filterarray.length>0? characters.map((item,index)=>{
+             console.log(item)
             return renderCharecterItem(item,index)
-         })}
+         }):filterarray.map((item,index)=>{
+          console.log(item)
+         return renderCharecterItem(item,index)
+      })} */}
+
+      {
+        filterarray.map((item,index)=>{
+          console.log(item)
+         return renderCharecterItem(item,index)
+      })
+      }
 
 
 
@@ -157,10 +220,10 @@ const Home = () => {
       
         <hr/>
       <div className="footer-section">
-           <div>
-                <button></button>
+           <div style={{display:"flex"}}>
+                <button onClick={()=>setPage( page!==1?page-1:1)}>{`<`}</button>
                <div className="footer-btn">{page}</div>
-             
+               <button onClick={()=>setPage(page+1)} >{`>`}</button>
            </div>
 
         
