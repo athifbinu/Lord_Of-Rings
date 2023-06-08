@@ -95,8 +95,8 @@ const Home = () => {
            <div className="dropdown-container">
            <label>Sort By</label>
               <select >
-                <option value="asc">asc order</option>
-                <option value="asc">asc order</option>
+                <option value="disabled">asc order</option>
+                <option value="disabled">asc order</option>
               </select>
 
            </div>
@@ -179,8 +179,8 @@ const Home = () => {
            <label>Limit</label>
               <select >
                  
-                <option value="Gender">10</option>
-                <option value="Gender">50</option>
+                <option value="limit">10</option>
+                <option value="limit">50</option>
               </select>
 
            </div>
