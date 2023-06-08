@@ -6,6 +6,7 @@ import { Routes,Route,Navigate } from 'react-router-dom'
 import Home from '../components/Home'
 import Detailes from '../components/Detailes'
 
+
 const Routers = () => {
   return (
     <div>

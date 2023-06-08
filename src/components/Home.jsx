@@ -3,6 +3,12 @@ import "../Styles/Home.css";
 import axios from "axios";
 import { ENV } from "../utlits/Constants";
 
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
+
+import LimitTags from "./Test";
+import { render } from "@testing-library/react";
 const Home = () => {
 
   const [characters, setCharacters] = useState([]);
@@ -17,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchCharecters();
-  }, []);
+  },[limit]);
 
   const fetchCharecters = async () => {
 
@@ -25,7 +31,14 @@ const Home = () => {
       .get(`${ENV.URL}/character`, {
         headers: {
           Authorization: `Bearer ${ENV.TOKEN}`,
+          
+          
         },
+        params:{
+          limit:limit,
+          page:page
+        }
+        
       })
       .then((res) => {
         const data = res.data.docs;
@@ -41,35 +54,34 @@ const Home = () => {
   };
 
 
-  const getCharacters = async (page, limit, name, race, gender, sort) => {
-    try {
-      const response = await setCharacters.get('/character', {
-        params: {
-          page,
-          limit,
-          name,
-          race,
-          gender,
-          sort,
-        },
-      });
-      return response.data.docs;
-    } catch (error) {
-      console.error('Error while fetching characters:', error);
-      throw error;
-    }
-  };
-  
-  const getCharecterById=async(charecterByid)=>{
-    try{
-      const response = await setCharacters.get(`/character/${charecterByid}`);
-      return response.data;
-    }catch (err){
-      console.error(`Error while fetching character ${charecterByid}:`, err);
-      throw err;
-    }
-  }
 
+
+  const handleSearch=e=>{
+    const SerachTerm=e.target.value;
+
+    const SerachName=setCharacters.filter(item =>item.name
+      .toLocaleLowerCase().includes(SerachTerm.toLocaleLowerCase()))
+
+      console.log(SerachName)
+  }
+  
+
+
+
+   const renderCharecterItem=(item,index)=>{
+
+       console.log('item',item)
+
+    return  (
+      <tbody>
+      <td>{index+1}</td>
+      <td>{item.name}</td>
+      <td>{item.race}</td>
+      <td>{item.gender}</td>
+      <td>Detailes</td>
+    </tbody>
+    )
+   }
 
 
 
@@ -89,7 +101,7 @@ const Home = () => {
       <div className="search-form">
         <div className="input-line">
           <label>Search</label>
-          <input type="text" className="input-box" placeholder="by name" />
+          <input type="text" className="input-box" placeholder="by name" onChange={handleSearch} />
 
 
            <div className="dropdown-container">
@@ -105,14 +117,8 @@ const Home = () => {
         
         <div className="input-line">
 
-        <div className="dropdown-container">
-           <label>Race</label>
-              <select >
-                <option value="asc">asc order</option>
-                <option value="asc">asc order</option>
-              </select>
+          <LimitTags/>
 
-           </div>
        
            <div className="dropdown-container">
            <label>Gender</label>
@@ -140,47 +146,30 @@ const Home = () => {
             <th>Actions</th>
           </tr>
         </thead>
+        
+         {characters.map((item,index)=>{
+            return renderCharecterItem(item,index)
+         })}
 
-        <tbody>
-          <td>1</td>
-          <td>Athif</td>
-          <td>Human</td>
-          <td>Male</td>
-          <td>Detailes</td>
-        </tbody>
 
-        <tbody>
-          <td>1</td>
-          <td>Athif</td>
-          <td>Human</td>
-          <td>Male</td>
-          <td>Detailes</td>
-        </tbody>
 
-        <tbody>
-          <td>1</td>
-          <td>Athif</td>
-          <td>Human</td>
-          <td>Male</td>
-          <td>Detailes</td>
-        </tbody>
       </table>
       
         <hr/>
       <div className="footer-section">
-           <div className="footer-btn">
-               <button>1</button>
-               <button>2</button>
-               <button>9</button>
+           <div>
+                <button></button>
+               <div className="footer-btn">{page}</div>
+             
            </div>
 
         
           <div className="limit-dropdown">
            <label>Limit</label>
-              <select >
+              <select value={limit} onChange={(event)=>setLimit(event.target.value)} >
                  
-                <option value="limit">10</option>
-                <option value="limit">50</option>
+                <option value="10">10</option>
+                <option value="50">50</option>
               </select>
 
            </div>
