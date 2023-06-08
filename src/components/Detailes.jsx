@@ -1,10 +1,11 @@
 import React from 'react'
+import "../Styles/Detailes.css"
 
 const Detailes = () => {
   return (
-    <div>
-      <h1>Home Dedtales</h1>
-    </div>
+      <div>
+          
+      </div>
   )
 }
 

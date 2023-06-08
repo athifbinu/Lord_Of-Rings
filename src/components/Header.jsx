@@ -5,8 +5,8 @@ const Header = () => {
     <header>
       <div className="heading">
         <h3>Charaters</h3>
-        <hr />
       </div>
+      <hr/>
     </header>
   )
 }

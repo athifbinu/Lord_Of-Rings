@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/Home.css";
 import axios from "axios";
-
 import { ENV } from "../utlits/Constants";
 
 const Home = () => {
@@ -71,7 +70,7 @@ const Home = () => {
     }
   }
 
-  
+
 
 
 
@@ -86,21 +85,28 @@ const Home = () => {
 
   return (
     <div className="container">
+
       <div className="search-form">
         <div className="input-line">
-          <label>Serach</label>
-          <input type="text" className="input-box" />
-          <label>Sort By</label>
-          <input type="text" className="input-box" />
+          <label>Search</label>
+          <input type="text" className="input-box" placeholder="by name" />
+           <div>
+           <label>Sort By</label>
+          <input type="text" className="input-box" placeholder="by name (asc/desc)"/>
+
+           </div>
         </div>
         <div className="input-line">
           <label>Race</label>
-          <input type="text" className="input-box" />
+          <input type="text" className="input-box" placeholder="list of races,multiselections" />
           <label>Gender</label>
-          <input type="text" className="input-box" />
-          <button>Submit</button>
+          <input type="text" className="input-box" placeholder="male/female/any"/>
+      
+          <button className="search-btn">Submit</button>
         </div>
       </div>
+
+       <hr/>
 
       <table className="table">
         <thead>
@@ -137,21 +143,23 @@ const Home = () => {
           <td>Detailes</td>
         </tbody>
       </table>
-
+      
+        <hr/>
       <div className="footer-section">
-        <hr />
-        <div className="footer-content">
-          <button>1</button>
-          <button>2</button>
-          <button>9</button>
+           <div className="footer-btn">
+               <button>1</button>
+               <button>2</button>
+               <button>9</button>
+           </div>
 
           <div className="limit-section">
             <label>Limit</label>
             <button>10</button>
           </div>
-        </div>
-        <hr />
+        
+   
       </div>
+      <hr/>
     </div>
   );
 };
