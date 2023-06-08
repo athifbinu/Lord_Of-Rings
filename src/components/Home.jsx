@@ -5,16 +5,23 @@ import axios from "axios";
 import { ENV } from "../utlits/Constants";
 
 const Home = () => {
+
   const [characters, setCharacters] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [name, setName] = useState('');
+  const [race, setRace] = useState([]);
+  const [gender, setGender] = useState('any');
+  const [sort, setSort] = useState('name');
 
-   const [Search,setSearch]=useState()
 
   useEffect(() => {
     fetchCharecters();
   }, []);
 
   const fetchCharecters = async () => {
+
     axios
       .get(`${ENV.URL}/character`, {
         headers: {
@@ -34,12 +41,44 @@ const Home = () => {
       });
   };
 
-  const handleSearch=(event)=>{
-    const searchValue = event.target.value;
-   
-     
- 
+
+  const getCharacters = async (page, limit, name, race, gender, sort) => {
+    try {
+      const response = await setCharacters.get('/character', {
+        params: {
+          page,
+          limit,
+          name,
+          race,
+          gender,
+          sort,
+        },
+      });
+      return response.data.docs;
+    } catch (error) {
+      console.error('Error while fetching characters:', error);
+      throw error;
+    }
+  };
+  
+  const getCharecterById=async(charecterByid)=>{
+    try{
+      const response = await setCharacters.get(`/character/${charecterByid}`);
+      return response.data;
+    }catch (err){
+      console.error(`Error while fetching character ${charecterByid}:`, err);
+      throw err;
+    }
   }
+
+  
+
+
+
+
+
+  
+
 
 
 
