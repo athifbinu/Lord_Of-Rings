@@ -90,17 +90,39 @@ const Home = () => {
         <div className="input-line">
           <label>Search</label>
           <input type="text" className="input-box" placeholder="by name" />
-           <div>
+
+
+           <div className="dropdown-container">
            <label>Sort By</label>
-          <input type="text" className="input-box" placeholder="by name (asc/desc)"/>
+              <select >
+                <option value="asc">asc order</option>
+                <option value="asc">asc order</option>
+              </select>
 
            </div>
+
         </div>
+        
         <div className="input-line">
-          <label>Race</label>
-          <input type="text" className="input-box" placeholder="list of races,multiselections" />
-          <label>Gender</label>
-          <input type="text" className="input-box" placeholder="male/female/any"/>
+
+        <div className="dropdown-container">
+           <label>Race</label>
+              <select >
+                <option value="asc">asc order</option>
+                <option value="asc">asc order</option>
+              </select>
+
+           </div>
+       
+           <div className="dropdown-container">
+           <label>Gender</label>
+              <select >
+                 
+                <option value="Gender">Male</option>
+                <option value="Gender">Female</option>
+              </select>
+
+           </div>
       
           <button className="search-btn">Submit</button>
         </div>
@@ -152,10 +174,17 @@ const Home = () => {
                <button>9</button>
            </div>
 
-          <div className="limit-section">
-            <label>Limit</label>
-            <button>10</button>
-          </div>
+        
+          <div className="limit-dropdown">
+           <label>Limit</label>
+              <select >
+                 
+                <option value="Gender">10</option>
+                <option value="Gender">50</option>
+              </select>
+
+           </div>
+          
         
    
       </div>

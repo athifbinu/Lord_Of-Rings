@@ -31,6 +31,15 @@
     margin-right: 109px;
 }
 
+.dropdown-container{
+  display: flex;
+  gap: 10px;
+
+}
+.dropdown-container select{
+  width: 184px;
+    height: 28px;
+}
   
 
   
@@ -74,16 +83,14 @@
 
 }
 
-.limit-section{
+.limit-dropdown{
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: sans-serif;
   margin-right: 309px;
-  
 }
-.limit-section button{
-  width: 70px;
-  height: 27px;
+.limit-dropdown select{
+  width: 98px;
+  height: 30px;
 }
 
