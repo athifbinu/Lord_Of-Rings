@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import "../Styles/Detailes.css"
 import { Link, useParams } from 'react-router-dom'
+import axios from 'axios';
+import { ENV } from '../utlits/Constants';
 
 const Detailes = () => {
 
 
    const {_id}=useParams();
    console.log("id",_id)
+
+
+   const getProductId=async(id)=>{
+      const responce=await axios.get(`${ENV.URL}/character/${id}`)
+
+      return responce.data;
+   }
   
 
 

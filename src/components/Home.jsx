@@ -3,12 +3,10 @@ import "../Styles/Home.css";
 import axios from "axios";
 import { ENV } from "../utlits/Constants";
 
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 
 
-import LimitTags from "./Test";
-import { render } from "@testing-library/react";
+import AutoCard from "./AutoCard";
+
 import { Link } from "react-router-dom";
 const Home = () => {
 
@@ -25,11 +23,6 @@ const Home = () => {
   const [selectedRaces, setSelectedRaces] = useState([])
 
 
-
-
-  
-
-
   useEffect(() => {
 
     fetchCharecters();
@@ -37,7 +30,7 @@ const Home = () => {
 
 
    useEffect(()=>{
-      let sortedcharecteres=characters.sort((a, b) => {
+      let sortedcharecteres=characters.sort((a, b)=>{
         if(sort === "asc"){
           if (a.name < b.name) {
             return -1;
@@ -78,18 +71,18 @@ const Home = () => {
       .then((res) => {
         const data = res.data.docs;
 
-        console.log("res", data);
+        
 
         setCharacters(data);
         setFilterArray(data)
       
       })
       .catch((err) => {
-        console.log("err", err);
+      
       });
   };
 
-
+  console.log()
 
 
   const handleSearch=e=>{
@@ -97,7 +90,6 @@ const Home = () => {
        setSeachName(SerachTerm)
     const filtered=characters.filter(item =>
       item.name.toLowerCase().includes(SerachTerm.toLowerCase()))
-         console.log("filteted",filtered)
        setFilterArray(filtered)
       
   }
@@ -112,15 +104,12 @@ const Home = () => {
     setSelectedRaces(value.map(option => option.title));
     setFilterArray(characters.filter(character => value.map(option => option.title)
     .includes(character.race)).length!==0?characters.filter(character => value.map(option => option.title).includes(character.race)):characters);
-    console.log("handlesel",value)
+  
   }
 
 
 
    const renderCharecterItem=(item,index)=>{
-
-       console.log('item',item)
-
     return  (
       <tbody >
       <td>{index+1}</td>
@@ -157,7 +146,7 @@ const Home = () => {
         
         <div className="input-line">
 
-          <LimitTags handle={(v)=>handleRaceSelect(v)}/>
+          <AutoCard handle={(v)=>handleRaceSelect(v)}/>
 
        
            <div className="dropdown-container">
@@ -188,17 +177,9 @@ const Home = () => {
           </tr>
         </thead>
         
-         {/* {filterarray.length>0? characters.map((item,index)=>{
-             console.log(item)
-            return renderCharecterItem(item,index)
-         }):filterarray.map((item,index)=>{
-          console.log(item)
-         return renderCharecterItem(item,index)
-      })} */}
-
       {
         filterarray.map((item,index)=>{
-          console.log(item)
+      
          return renderCharecterItem(item,index)
       })
       }
