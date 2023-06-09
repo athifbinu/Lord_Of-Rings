@@ -63,7 +63,7 @@ const Home = () => {
         setCharacters(data);
         setFilterArray(data);
       })
-      .catch((err) => {});
+      .catch((err) => {console.log(err)});
   };
 
   console.log();

@@ -31,11 +31,11 @@ const Detailes = () => {
 
        console.log(data,"data")
      })
-     .catch((err) => {});
+     .catch((err) => {console.log(err)});
  };
 
 
- 
+
 
 
 
