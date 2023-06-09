@@ -13,7 +13,7 @@ export default function LimitTags({handle}) {
       renderInput={(params) => (
         <TextField {...params} label="limitTags" placeholder="Favorites" />
       )}
-      sx={{ width: '500px' }}
+      sx={{ width: '200px' }}
     />
   );
 }

@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../Styles/Detailes.css"
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const Detailes = () => {
+
+
+   const {_id}=useParams();
+   console.log("id",_id)
+  
+
+
+
+
   return (
     <>
     <div className='hero-section'>

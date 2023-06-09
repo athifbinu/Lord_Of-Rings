@@ -9,6 +9,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import LimitTags from "./Test";
 import { render } from "@testing-library/react";
+import { Link } from "react-router-dom";
 const Home = () => {
 
   const [characters, setCharacters] = useState([]);
@@ -121,29 +122,17 @@ const Home = () => {
        console.log('item',item)
 
     return  (
-      <tbody>
+      <tbody >
       <td>{index+1}</td>
       <td>{item.name}</td>
       <td>{item.race}</td>
       <td>{item.gender}</td>
-      <td>Detailes</td>
+      <Link className="th-link" to={`/detailes/${item._id}`}><td>Details <span>{`>`}</span></td></Link>
     </tbody>
     )
    }
 
 
-
-
-
-
-
-
-  
-
-
-
-
-  
 
   return (
     <div className="container">
@@ -220,9 +209,9 @@ const Home = () => {
       
         <hr/>
       <div className="footer-section">
-           <div style={{display:"flex"}}>
+           <div className="footer-btn" style={{display:"flex"}}>
                 <button onClick={()=>setPage( page!==1?page-1:1)}>{`<`}</button>
-               <div className="footer-btn">{page}</div>
+               <div>{page}</div>
                <button onClick={()=>setPage(page+1)} >{`>`}</button>
            </div>
 
