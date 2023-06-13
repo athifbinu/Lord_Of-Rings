@@ -8,73 +8,75 @@ const Detailes = () => {
   const { _id } = useParams();
   console.log("id", _id);
 
-
-  const [cherecterId,setCharecterId]=useState([])
-
+  const [character, setCharacter] = useState([]);
 
   useEffect(() => {
-   fetchCharecters();
- }, []);
+    fetchCharacter();
+  }, []);
 
-  const fetchCharecters = async () => {
-   axios
-     .get(`${ENV.URL}/character`, {
-       headers: {
-         Authorization: `Bearer ${ENV.TOKEN}`,
-       },
-     })
-     .then((res) => {
-       const data = res.data.docs;
-
-       setCharecterId(data);
-       setCharecterId(data);
-
-       console.log(data,"data")
-     })
-     .catch((err) => {console.log(err)});
- };
-
-
-
-
-
-
-
-
-
- 
-
+  const fetchCharacter = async () => {
+    axios
+      .get(`${ENV.URL}/character/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${ENV.TOKEN}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data.docs;
+        setCharacter(data);
+        console.log(data, "data");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
-      <div className="hero-section">
-        <div className="main-section">
-          <div className="left-section">
-            <p>Name</p>
-            <p>WikiUrl</p>
-            <p>Race</p>
-            <p>Gender</p>
-            <p>Height</p>
-            <p>Hair</p>
-            <p>Realm</p>
-            <p>Birth</p>
-            <p>Spouse</p>
-            <p>Death</p>
-          </div>
+       {
+         character.map((item,index)=>{
+            return(
+              <div key={index} className="hero-section">
+              <div className="main-section">
+                <div className="left-section">
+                  <p>Name:</p>
+                  <p>WikiUrl: </p>
+                  <p>Race: </p>
+                  <p>Gender: </p>
+                  <p>Height: </p>
+                  <p>Hair: </p>
+                  <p>Realm: </p>
+                  <p>Birth:</p>
+                  <p>Spouse: </p>
+                  <p>Death: </p>
+                </div>
+      
+                <div className="right-section">
+                  <p>{item.name}</p>
+                  <p>{item.wikiUrl}</p>
+                   <p>{item.race}</p>
+                   <p>{item.gender}</p>
+                   <p>{item.hair}</p>
+                   <p>{item.realm}</p>
+                   <p>{item.birth}</p>
+                   <p>{item.spouse}</p>
+                   <p>{item.death}</p>
+                </div>
+              </div>
+      
+              <div className="close-btn">
+                <Link to="/home">
+                  <button>Close</button>
+                </Link>
+              </div>
+            </div>
+            )
+         })
+       }
+      
+      <hr/>
+      </>
 
-          <div className="right-section">
-            <p>Athif</p>
-          </div>
-        </div>
-
-        <div className="close-btn">
-          <Link to="/home">
-            <button>Close</button>
-          </Link>
-        </div>
-      </div>
-      <hr />
-    </>
   );
 };
 

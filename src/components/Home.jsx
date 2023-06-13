@@ -59,9 +59,9 @@ const Home = () => {
       })
       .then((res) => {
         const data = res.data.docs;
-
+             console.log(data)
         setCharacters(data);
-        setFilterArray(data);
+        setFilterArray(data,"first page api");
       })
       .catch((err) => {console.log(err)});
   };
